@@ -1,3 +1,9 @@
+" Remind vimmer to take a break
+" Last Change: 2021-01-26
+" Author: Kong Jun <kongjun18@outlook.com>
+" Github: https://github.com/kongjun18
+" License: GPL-v3
+
 if exists('g:loaded_rest_reminder_vim') || &cp || !has('nvim') || !has('timers')
     finish
 endif
