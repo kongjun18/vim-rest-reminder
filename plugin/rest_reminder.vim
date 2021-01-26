@@ -15,8 +15,8 @@ let s:win = -1
 let s:buf = -1
 
 function s:echo_rest_alert() abort
-    let l:editor_width = utils#get_editor_width()
-    let l:editor_height = utils#get_editor_height()
+    let l:editor_width = &columns
+    let l:editor_height = &lines
     let l:win_width = 84
     let l:win_height = 13
 
@@ -54,7 +54,6 @@ function s:echo_rest_alert() abort
 endfunction
 
 function s:callback(timer)
-    :echomsg s:counter
     let s:counter += 1
     if s:counter == 45
         call s:echo_rest_alert()
