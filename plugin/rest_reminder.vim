@@ -10,6 +10,7 @@ endif
 let g:loaded_rest_reminder_vim = 1
 
 let s:counter = 0
+let s:counterdowm = 0
 let s:win = -1
 let s:buf = -1
 
@@ -56,6 +57,12 @@ function s:callback(timer)
     let s:counter += 1
     if s:counter == 45
         call s:echo_rest_alert()
+        let s:counterdowm = 10
+        echomsg s:counterdowm 'min'
+        let s:counterdowm -= 1
+    elseif s:counter > 45 && s:counter < 55
+        echomsg s:counterdowm 'min'
+        let s:counterdowm -= 1
     elseif s:counter == 55
         if nvim_win_is_valid(s:win)
             call nvim_win_close(s:win, v:true)
@@ -66,6 +73,7 @@ function s:callback(timer)
         if bufexists(s:buf)
             call nvim_buf_delete(s:buf, {'force' : 1})
         endif
+        echomsg "Break ends"
     endif
 endfunction
 
