@@ -16,6 +16,7 @@ Once user focus on Vim more than 45 minutes, It will pop a window in the middle 
 |  |_| \___/ \___/  |_| \_|_____|_____|____/    |_| \___/  |_| \_\_____|____/ |_|  |
 +==================================================================================+
 ```
+![Screenshot](https://gitee.com/kongjun18/image/raw/master/Screenshot_20210128_164726.png)
 
 # Requirements
 - Neovim with *timer* support
