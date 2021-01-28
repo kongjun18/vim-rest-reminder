@@ -1,5 +1,5 @@
 " Remind vimmer to take a break
-" Last Change: 2021-01-26
+" Last Change: 2021-01-28
 " Author: Kong Jun <kongjun18@outlook.com>
 " Github: https://github.com/kongjun18
 " License: GPL-v3
@@ -9,7 +9,6 @@ if exists('g:loaded_rest_reminder_vim') || &cp || !has('nvim') || !has('timers')
 endif
 let g:loaded_rest_reminder_vim = 1
 
-let g:loaded_rest_reminder_vim_autoload = 1
 let s:counter = 0
 let s:win = -1
 let s:buf = -1
@@ -36,6 +35,7 @@ function s:echo_rest_alert() abort
     call add(l:messages, '+==================================================================================+')
 
     let s:buf = nvim_create_buf(v:true, v:true)
+    call nvim_buf_clear_namespace(s:buf, -1, 0, -1)             " clear highlight of popup window
     call nvim_buf_set_name(s:buf, 'rest_alert')
     call nvim_buf_set_lines(s:buf, 0, -1, v:true, l:messages)
     call nvim_buf_set_option(s:buf, 'modifiable', v:false)
@@ -46,11 +46,10 @@ function s:echo_rest_alert() abort
                     \ height: l:win_height,
                     \ style: 'minimal',
                     \} 
-    " TODO: 窗口过小
+    " TODO: Editor windows is too small
     let s:win = nvim_open_win(s:buf, v:true, l:win_opt)
-    highlight def Black ctermfg=Black ctermbg=Black
-    call nvim_win_set_option(s:win, 'winhl', 'NonText:Black')
-    call nvim_win_set_option(s:win, 'winhl', 'Normal:Red')
+    highlight def RestAlertColor term=bold ctermbg=Black ctermfg=Red gui=bold guibg=Black guifg=Red
+    call nvim_win_set_option(s:win, 'winhl', 'Normal:RestAlertColor')
 endfunction
 
 function s:callback(timer)
